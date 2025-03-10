@@ -1,0 +1,46 @@
+graph TD
+    main[main.c] --> game[game.c]
+    main --> ui[ui.c]
+    game --> board[board.c]
+    game --> dictionary[dictionary.c]
+    ui --> board
+    
+    %% Header dependencies
+    main -.-> game_h[game.h]
+    main -.-> ui_h[ui.h]
+    game -.-> board_h[board.h]
+    game -.-> dictionary_h[dictionary.h]
+    ui -.-> board_h
+    board -.-> board_h
+    dictionary -.-> dictionary_h
+    
+    %% Special files
+    config[config.h] -.-> ui
+    config -.-> game
+    
+    %% Generated scripts
+    main --> install[generated/install-osx.sh]
+    main --> testall[generated/test-all.sh]
+    
+    %% Resource files
+    dictionary --> dict_file[resources/dictionary.txt]
+    game --> tiles_file[resources/tiles.dat]
+    
+    %% Test files
+    test_board[tests/test_board.c] --> board
+    test_game[tests/test_game.c] --> game
+    test_dict[tests/test_dictionary.c] --> dictionary
+    
+    %% Style definitions
+    classDef source fill:#f9d5e5,stroke:#333,stroke-width:1px;
+    classDef header fill:#eeeeee,stroke:#333,stroke-width:1px;
+    classDef resource fill:#d5f9e8,stroke:#333,stroke-width:1px;
+    classDef test fill:#e5f9d5,stroke:#333,stroke-width:1px;
+    classDef generated fill:#d5e5f9,stroke:#333,stroke-width:1px;
+    
+    %% Apply styles
+    class main,game,ui,board,dictionary source;
+    class game_h,ui_h,board_h,dictionary_h,config header;
+    class dict_file,tiles_file resource;
+    class test_board,test_game,test_dict test;
+    class install,testall generated;

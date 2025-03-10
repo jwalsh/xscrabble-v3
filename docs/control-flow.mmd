@@ -1,0 +1,52 @@
+sequenceDiagram
+    participant User
+    participant main as Main
+    participant ui as UI System
+    participant game as Game Logic
+    participant board as Board
+    participant dict as Dictionary
+    
+    User->>main: Execute Program
+    main->>game: Initialize Game
+    main->>ui: Initialize UI
+    main->>main: Enter Event Loop
+    
+    rect rgb(240, 240, 240)
+        Note over User,dict: User Interaction
+        User->>ui: Place Tile
+        ui->>game: Request Place Tile
+        game->>board: Update Board
+        game->>ui: Update Display
+    end
+    
+    rect rgb(240, 240, 240)
+        Note over User,dict: Word Verification
+        User->>ui: Evaluate Move
+        ui->>game: Request Evaluation
+        game->>board: Get Words
+        game->>dict: Validate Words
+        dict->>game: Return Validity
+        game->>ui: Show Result
+    end
+    
+    rect rgb(240, 240, 240)
+        Note over User,dict: Turn Completion
+        User->>ui: Finish Turn
+        ui->>game: Request Finish Turn
+        game->>board: Commit Placement
+        game->>game: Generate New Tiles
+        game->>game: Update Score
+        game->>ui: Update Display
+    end
+    
+    rect rgb(240, 240, 240)
+        Note over User,dict: Script Execution (outside game)
+        User->>+install: Run install-osx.sh
+        install->>-User: Installation Complete
+        
+        User->>+testall: Run test-all.sh
+        testall->>test_board: Run Board Tests
+        testall->>test_game: Run Game Tests
+        testall->>test_dict: Run Dictionary Tests
+        testall->>-User: Tests Complete
+    end

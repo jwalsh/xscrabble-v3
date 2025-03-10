@@ -1,0 +1,28 @@
+graph LR
+    source[Source Files] --> build{Make/CMake}
+    build -->|compile| obj[Object Files]
+    obj -->|link| bin[Executable]
+    
+    bin --> install[Install]
+    bin --> test[Test]
+    
+    install -->|macOS| osx[generated/install-osx.sh]
+    install -->|Linux| linux[generated/install-linux.sh]
+    
+    test --> test_all[generated/test-all.sh]
+    
+    osx --> xquartz[XQuartz Setup]
+    linux --> xlib[X11 Setup]
+    
+    xquartz --> deployed[Deployed Application]
+    xlib --> deployed
+    
+    classDef process fill:#f9d9bb,stroke:#333,stroke-width:1px;
+    classDef file fill:#cce6ff,stroke:#333,stroke-width:1px;
+    classDef script fill:#ccffcc,stroke:#333,stroke-width:1px;
+    classDef env fill:#ffcccc,stroke:#333,stroke-width:1px;
+    
+    class source,obj,bin file;
+    class build,install,test process;
+    class osx,linux,test_all script;
+    class xquartz,xlib,deployed env;

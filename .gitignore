@@ -1,0 +1,134 @@
+# Generated directories
+/generated/
+/bin/
+/obj/
+/dist/
+
+# Build artifacts
+*.o
+*.a
+*.so
+*.dylib
+*.out
+*.exe
+*.dll
+
+# Emacs specific
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+.org-id-locations
+*_archive
+*_flymake.*
+/eshell/
+/elpa/
+.cask/
+flycheck_*.el
+/server/
+.projectile
+.dir-locals.el
+/emacs.d/
+.tern-port
+.emacs.d/
+
+# Org-mode
+.org-id-locations
+*_archive
+ltximg/
+*.tex
+
+# Org-babel tangled files
+/src-gen/
+
+# macOS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# XCode
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+xcuserdata/
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+*.xcworkspace
+*.xcodeproj
+
+# X11/XQuartz specific
+.xsession-errors*
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Testing/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+.cmake/
+
+# Testing
+/tests/*.log
+/tests/test_*
+!/tests/test_*.c
+/tests/*.xml
+
+# Debugging
+core
+vgcore.*
+.gdb_history
+callgrind.out.*
+perf.data
+perf.data.old
+
+# Dependencies
+/vendor/
+
+# Documentation generated files
+/docs/html/
+/docs/latex/
+/docs/*.svg
+/docs/*.png
+/docs/*.pdf
+/docs/*.html
+
+# Editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
+*.orig
+.~lock.*

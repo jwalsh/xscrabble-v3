@@ -1,0 +1,148 @@
+#+TITLE: XScrabble v3
+#+AUTHOR: jwalsh
+#+DATE: 2025-03-10
+#+PROPERTY: header-args :mkdirp yes
+
+* XScrabble v3
+A modern implementation of the classic Scrabble word game for X11/XQuartz on macOS and Unix systems.
+
+* System Architecture
+
+** File Structure and Dependencies
+#+begin_src mermaid :tangle docs/system-architecture.mmd :mkdirp yes
+graph TD
+    main[main.c] --> game[game.c]
+    main --> ui[ui.c]
+    game --> board[board.c]
+    game --> dictionary[dictionary.c]
+    ui --> board
+    
+    %% Header dependencies
+    main -.-> game_h[game.h]
+    main -.-> ui_h[ui.h]
+    game -.-> board_h[board.h]
+    game -.-> dictionary_h[dictionary.h]
+    ui -.-> board_h
+    board -.-> board_h
+    dictionary -.-> dictionary_h
+    
+    %% Special files
+    config[config.h] -.-> ui
+    config -.-> game
+    
+    %% Generated scripts
+    main --> install[generated/install-osx.sh]
+    main --> testall[generated/test-all.sh]
+    
+    %% Resource files
+    dictionary --> dict_file[resources/dictionary.txt]
+    game --> tiles_file[resources/tiles.dat]
+    
+    %% Test files
+    test_board[tests/test_board.c] --> board
+    test_game[tests/test_game.c] --> game
+    test_dict[tests/test_dictionary.c] --> dictionary
+    
+    %% Style definitions
+    classDef source fill:#f9d5e5,stroke:#333,stroke-width:1px;
+    classDef header fill:#eeeeee,stroke:#333,stroke-width:1px;
+    classDef resource fill:#d5f9e8,stroke:#333,stroke-width:1px;
+    classDef test fill:#e5f9d5,stroke:#333,stroke-width:1px;
+    classDef generated fill:#d5e5f9,stroke:#333,stroke-width:1px;
+    
+    %% Apply styles
+    class main,game,ui,board,dictionary source;
+    class game_h,ui_h,board_h,dictionary_h,config header;
+    class dict_file,tiles_file resource;
+    class test_board,test_game,test_dict test;
+    class install,testall generated;
+#+end_src
+
+** Control Flow
+#+begin_src mermaid :tangle docs/control-flow.mmd
+sequenceDiagram
+    participant User
+    participant main as Main
+    participant ui as UI System
+    participant game as Game Logic
+    participant board as Board
+    participant dict as Dictionary
+    
+    User->>main: Execute Program
+    main->>game: Initialize Game
+    main->>ui: Initialize UI
+    main->>main: Enter Event Loop
+    
+    rect rgb(240, 240, 240)
+        Note over User,dict: User Interaction
+        User->>ui: Place Tile
+        ui->>game: Request Place Tile
+        game->>board: Update Board
+        game->>ui: Update Display
+    end
+    
+    rect rgb(240, 240, 240)
+        Note over User,dict: Word Verification
+        User->>ui: Evaluate Move
+        ui->>game: Request Evaluation
+        game->>board: Get Words
+        game->>dict: Validate Words
+        dict->>game: Return Validity
+        game->>ui: Show Result
+    end
+    
+    rect rgb(240, 240, 240)
+        Note over User,dict: Turn Completion
+        User->>ui: Finish Turn
+        ui->>game: Request Finish Turn
+        game->>board: Commit Placement
+        game->>game: Generate New Tiles
+        game->>game: Update Score
+        game->>ui: Update Display
+    end
+    
+    rect rgb(240, 240, 240)
+        Note over User,dict: Script Execution (outside game)
+        User->>+install: Run install-osx.sh
+        install->>-User: Installation Complete
+        
+        User->>+testall: Run test-all.sh
+        testall->>test_board: Run Board Tests
+        testall->>test_game: Run Game Tests
+        testall->>test_dict: Run Dictionary Tests
+        testall->>-User: Tests Complete
+    end
+#+end_src
+
+** Build and Installation Flow
+#+begin_src mermaid :tangle docs/build-flow.mmd
+graph LR
+    source[Source Files] --> build{Make/CMake}
+    build -->|compile| obj[Object Files]
+    obj -->|link| bin[Executable]
+    
+    bin --> install[Install]
+    bin --> test[Test]
+    
+    install -->|macOS| osx[generated/install-osx.sh]
+    install -->|Linux| linux[generated/install-linux.sh]
+    
+    test --> test_all[generated/test-all.sh]
+    
+    osx --> xquartz[XQuartz Setup]
+    linux --> xlib[X11 Setup]
+    
+    xquartz --> deployed[Deployed Application]
+    xlib --> deployed
+    
+    classDef process fill:#f9d9bb,stroke:#333,stroke-width:1px;
+    classDef file fill:#cce6ff,stroke:#333,stroke-width:1px;
+    classDef script fill:#ccffcc,stroke:#333,stroke-width:1px;
+    classDef env fill:#ffcccc,stroke:#333,stroke-width:1px;
+    
+    class source,obj,bin file;
+    class build,install,test process;
+    class osx,linux,test_all script;
+    class xquartz,xlib,deployed env;
+#+end_src
+
