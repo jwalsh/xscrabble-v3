@@ -6,6 +6,96 @@
 * XScrabble v3
 A modern implementation of the classic Scrabble word game for X11/XQuartz on macOS and Unix systems.
 
+* Installation
+
+** Building from Source
+#+begin_src shell
+mkdir build && cd build
+cmake ..
+make
+#+end_src
+
+** macOS Installation
+#+begin_src shell
+./scripts/install-osx.sh
+#+end_src
+
+* Dictionary Features for Language Learning
+
+XScrabble v3 includes enhanced dictionary support for language learning. This feature allows you to:
+
+- View definitions of words in French and English
+- See example usage
+- Learn parts of speech
+- Quiz yourself on vocabulary
+
+** Standard French Dictionary
+
+The regular French dictionary provides common French words with definitions.
+
+#+begin_src shell
+# Build the dictionary demo
+cd build
+cmake ..
+make
+
+# Run the French dictionary demo
+./dictionary_demo
+
+# Interactive mode
+./dictionary_demo -i
+#+end_src
+
+** AL Fictional Dictionary (Learning Template)
+
+The AL Dictionary is a set of made-up words that sound plausible for Scrabble but aren't in standard dictionaries. These words have fictional French definitions and English translations, making them perfect for language learning practice without the pressure of real-world accuracy.
+
+The dictionary includes:
+- 500+ longer words that sound like plausible English/French words
+- Strategic two-letter and three-letter words perfect for high-scoring Scrabble plays
+- Multilingual definitions (French and English, with some Spanish translations)
+
+#+begin_src shell
+# Build and run the AL dictionary demo
+cd build
+cmake ..
+make
+./al_dictionary_demo
+
+# Interactive mode with quiz feature
+./al_dictionary_demo -i
+#+end_src
+
+*** Strategic Short Words
+
+Special attention has been paid to include short words (2-3 letters) that would be valuable in Scrabble games. These include:
+
+- Two-letter words like QI, ZO, XI, JA, KE that connect easily with other words
+- Three-letter words like ZAX, QAF, XIZ, JIV, KEF that use high-scoring letters (Q, Z, X, J, K)
+- Words that look plausible enough that opponents might not challenge them
+
+*** AL Dictionary Interactive Commands
+- =lookup WORD= - Look up a word's definition
+- =list= - List all words in the dictionary
+- =quiz NUM= - Take a vocabulary quiz with NUM questions
+- =search PATTERN= - Search for words containing PATTERN
+
+*** Adding Your Own Words and Definitions
+
+Both dictionaries use a simple JSON format. The AL dictionary template is located at =data/dictionaries/extracted/AL_DEFINITIONS.json=.
+
+Example format:
+#+begin_src json
+{
+  "ABANTH": {
+    "definition": "Une plante médicinale utilisée pour traiter les maux de tête.",
+    "english_definition": "A medicinal plant used to treat headaches.",
+    "example": "L'abanth pousse seulement en haute altitude.",
+    "part_of_speech": "nom féminin"
+  }
+}
+#+end_src
+
 * System Architecture
 
 ** File Structure and Dependencies

@@ -1,0 +1,52 @@
+{
+  "abeille": {
+    "definition": "Insecte hyménoptère qui produit le miel et la cire.",
+    "example": "Les abeilles butinent les fleurs.",
+    "part_of_speech": "nom féminin"
+  },
+  "aborder": {
+    "definition": "1. Approcher, accoster. 2. Entamer une discussion sur un sujet.",
+    "example": "Le navire aborde le quai. J'aimerais aborder cette question avec vous.",
+    "part_of_speech": "verbe"
+  },
+  "bonjour": {
+    "definition": "Salutation utilisée pendant la journée pour saluer quelqu'un.",
+    "example": "Bonjour, comment allez-vous ?",
+    "part_of_speech": "nom masculin"
+  },
+  "café": {
+    "definition": "1. Graine du caféier. 2. Boisson préparée avec cette graine torréfiée et moulue.",
+    "example": "Je prends mon café sans sucre.",
+    "part_of_speech": "nom masculin"
+  },
+  "chaise": {
+    "definition": "Siège à dossier, sans bras, pour une personne.",
+    "example": "Elle s'est assise sur une chaise en bois.",
+    "part_of_speech": "nom féminin"
+  },
+  "merci": {
+    "definition": "Expression de gratitude ou de remerciement.",
+    "example": "Merci pour votre aide.",
+    "part_of_speech": "nom masculin"
+  },
+  "pomme": {
+    "definition": "Fruit comestible de couleur rouge, verte ou jaune, du pommier.",
+    "example": "J'ai mangé une pomme pour le petit-déjeuner.",
+    "part_of_speech": "nom féminin"
+  },
+  "scrabble": {
+    "definition": "Jeu de société où les joueurs forment des mots entrecroisés sur un plateau à l'aide de lettres de valeurs différentes.",
+    "example": "Nous jouons au Scrabble tous les dimanches.",
+    "part_of_speech": "nom masculin"
+  },
+  "table": {
+    "definition": "Meuble composé d'un plateau horizontal posé sur un ou plusieurs pieds.",
+    "example": "Les plats sont servis sur la table.",
+    "part_of_speech": "nom féminin"
+  },
+  "voiture": {
+    "definition": "Véhicule automobile à quatre roues destiné au transport des personnes.",
+    "example": "J'ai acheté une nouvelle voiture.",
+    "part_of_speech": "nom féminin"
+  }
+}

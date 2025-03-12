@@ -11,10 +11,10 @@ find_package(X11 REQUIRED)
 # Include directories
 include_directories(include ${X11_INCLUDE_DIR})
 
-# Add source files
-file(GLOB SOURCES "src/*.c")
+# Add source files for main application
+file(GLOB SOURCES "src/board.c" "src/dictionary.c" "src/game.c" "src/main.c" "src/ui.c")
 
-# Define executable
+# Define main executable
 add_executable(xscrabble ${SOURCES})
 
 # Link libraries
@@ -25,9 +25,16 @@ target_link_libraries(xscrabble PRIVATE
     ${X11_Xmu_LIB}
 )
 
+# Dictionary demos
+add_executable(dictionary_demo src/dictionary_demo.c src/dictionary_enhanced.c)
+add_executable(al_dictionary_demo src/al_dictionary_demo.c)
+
 # Install targets
 install(TARGETS xscrabble DESTINATION bin)
+install(TARGETS dictionary_demo DESTINATION bin)
+install(TARGETS al_dictionary_demo DESTINATION bin)
 install(DIRECTORY resources/ DESTINATION share/xscrabble)
+install(DIRECTORY data/dictionaries/ DESTINATION share/xscrabble/dictionaries)
 
 # Testing
 enable_testing()
